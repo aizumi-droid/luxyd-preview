@@ -1,0 +1,212 @@
+/* B: one coordinated motion system. Static content is the default and fallback. */
+.motion-b main{overflow:visible}
+.hero-journey{position:relative;height:auto}
+.motion-b .hero{height:var(--hero-height,100svh);min-height:0;max-height:none}
+.motion-b .hero-scene{position:absolute;inset:0;z-index:-3;transform:scale(var(--hero-scale,1.035));transition:transform 1.4s ease-out;animation:scene-breath 12s ease-out 2s both}
+.motion-b .hero-image{position:absolute;inset:0;width:100%;height:100%;object-position:center;transform:none;animation:none;z-index:auto}
+.hero-lights{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.lamp-zone{opacity:0}
+.opening-ready .lamp-zone{animation:lamp-on .8s cubic-bezier(.25,.1,.25,1) both}
+.opening-ready .lamp-far{animation-delay:.25s}.opening-ready .lamp-mid{animation-delay:.55s}.opening-ready .lamp-near{animation-delay:.85s}.opening-ready .lamp-ground{animation-delay:1.2s}
+.motion-b .hero h1 span{animation:none}
+.motion-b.opening-ready .hero h1 span{animation:copy-arrives .7s cubic-bezier(.22,.65,.3,1) .05s both}
+.opening-ready.opening-complete .lamp-zone{opacity:0;animation:none}
+.motion-b.opening-complete .hero h1 span{opacity:1;transform:none;animation:none}
+.motion-b .hero:after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent 75%,#10111240 91%,#101112 100%)}
+.motion-b .hero-shade{background:linear-gradient(180deg,#03060970,transparent 27%,#03050820 80%),radial-gradient(ellipse at 50% 43%,#02050988,transparent 65%)}
+.motion-b .hero-copy{opacity:var(--hero-copy-opacity,1);transform:translateY(var(--hero-copy-y,0px))}
+.motion-b .hero-bottom{opacity:var(--hero-cue-opacity,1)}
+.motion-b .hero-bottom i{position:relative;background:#ffffff30;overflow:hidden}
+.motion-b .hero-bottom i:after{content:'';position:absolute;inset:0;background:#e8dfcf;transform-origin:left;animation:guide-line 1.2s ease .7s both}
+.motion-b .strengths-ribbon{position:relative;background:var(--night)}
+@keyframes lamp-on{from{opacity:.86}to{opacity:0}}
+@keyframes copy-arrives{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes guide-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes scene-breath{from{scale:1}to{scale:1.018}}
+/* Native photo rails. No entrance masks in gallery, seasons, comparison or contact. */
+.slide-window{overflow:hidden;position:relative;background:#0b0d10}
+.motion-b .gallery .slide-window>img{transform:translateX(var(--slide-x,0px)) scale(1.045);transition:transform .65s cubic-bezier(.2,.65,.3,1)}
+.swipe-hint,.season-nav{display:none}
+.motion-b .gallery,.motion-b .season-grid{overscroll-behavior-x:contain;touch-action:pan-x pan-y pinch-zoom}
+.photo-window{position:relative;overflow:hidden;background:#101112}
+.motion-b .photo-rise-ready{opacity:.4;transform:translateY(40px)}
+@media(max-width:760px){.motion-b .photo-rise-ready{transform:translateY(32px)}}
+.motion-b .photo-window>img{height:auto;filter:none;transform:none;transition:none}
+/* Curtain stays open by default; WAAPI only covers it during a visible entry. */
+.photo-entry-frame>.photo-entry-mask{position:absolute;inset:-1px;display:block;background:rgba(16,17,18,.82);transform:scaleY(0);transform-origin:top;pointer-events:none}
+.motion-b .photo-window>img{transform-origin:center}
+.surface-panel{position:relative;transition:transform .8s cubic-bezier(.22,.65,.3,1),clip-path .8s;isolation:isolate}
+.surface-panel.surface-pending{transform:translateY(20px);clip-path:inset(2% 0 0)}
+.surface-panel:not(.surface-pending){transform:none;clip-path:inset(0)}
+.motion-b .button{isolation:isolate;transition:background .5s,color .5s,border-color .5s,box-shadow .6s}
+.motion-b .button:after{content:'';position:absolute;inset:-30% -10%;z-index:-1;background:linear-gradient(110deg,transparent 36%,#dcc5a00a 44%,#f2dfbc30 50%,#dcc5a00a 56%,transparent 64%);opacity:0;transform:translateX(-120%);pointer-events:none}
+@media(hover:hover) and (pointer:fine){.motion-b .button:hover:after{animation:cta-light-pass 1.15s cubic-bezier(.2,.5,.3,1) both}.motion-b .button:hover{border-color:#d7c19d;box-shadow:inset 0 0 0 1px #d7c19d30}}
+.motion-b .button:focus-visible{border-color:#d7c19d;box-shadow:inset 0 0 0 1px #d7c19d30}
+.motion-b .budget .button:hover{background:#32352f;border-color:#b5a183}
+@keyframes cta-light-pass{0%{opacity:0;transform:translateX(-120%)}18%{opacity:.8}75%{opacity:.6}100%{opacity:0;transform:translateX(120%)}}
+:is(.motion-paused,.motion-reduced) .button:after{animation:none!important;opacity:0!important}
+.compare-instruction{font-size:12px;letter-spacing:.06em;color:var(--muted);margin-top:16px}
+/* Stacking is optional enhancement; every article stays in document order. */
+.motion-b .experience{gap:7%;grid-template-columns:.85fr 1.3fr;align-items:start}
+.motion-b .experience-intro{position:sticky;top:68px;min-width:0}
+.motion-b .experience .section-title{position:static;top:auto}
+.motion-b .experience-grid{display:block;min-width:0}
+.motion-b .experience-grid article{position:relative;display:block;min-width:0;padding:6px 26px 30px;border-top:1px solid #b4a48a88;background:#101112;min-height:260px;margin-bottom:24px}
+.motion-b .experience-grid article:last-child{margin-bottom:0}
+.motion-b .experience-grid h3{font-size:clamp(23px,2.05vw,30px);margin:18px 0 14px;overflow-wrap:anywhere}
+.motion-b .experience-grid p{font-size:16px;line-height:2;overflow-wrap:anywhere;transition:color .3s}
+.motion-b .experience-num{display:block;font:60px/64px Georgia,serif;letter-spacing:-.035em;font-variant-numeric:lining-nums tabular-nums;color:#bbaa8f;padding:0}
+.motion-b .experience.stack-safe .experience-grid article{position:sticky;top:calc(68px + var(--panel-index)*72px)}
+.motion-b .experience-grid article.panel-covered h3,.motion-b .experience-grid article.panel-covered p{color:#a5a098}
+.motion-b .experience:not(.stack-safe) .experience-intro{position:static}
+.motion-b section.experience.wrap{padding-bottom:45px}
+.motion-b section.compare-section.wrap{padding-top:48px}
+/* Selected copy and lower company figures. */
+.motion-b .line-heading{text-wrap:initial;color:inherit}
+.copy-line{display:block;opacity:1;transform:none;max-width:100%}
+.motion-b .budget .copy-line{display:inline-block}
+.motion-b .budget .section-title:after{content:'';display:block;width:44px;height:1px;background:#9b8b6e;margin-top:24px}
+.motion-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.roll-visual{font-variant-numeric:tabular-nums;line-height:inherit}
+.roll-digit{display:inline-block;position:relative;line-height:inherit}.roll-ghost{visibility:hidden}.roll-window{position:absolute;inset:0;overflow:hidden}.roll-strip{display:block;transform:translateY(-90.9090909%)}.roll-row{display:block;line-height:inherit}
+.motion-b .process li{position:relative}
+.motion-b .process li:before{content:'';position:absolute;left:0;top:-1px;width:calc(100% + 25px);height:1px;background:#cbbda180;transform-origin:left;transform:scaleX(var(--step-light,1));transition:transform .35s ease-out;pointer-events:none}
+.motion-b .process li:nth-child(4n):before,.motion-b .process li:last-child:before{width:100%}
+@media(min-width:761px) and (max-width:1100px){.motion-b .process li:nth-child(2n):before{width:100%}}
+@media(max-width:760px){
+ .motion-b .hero-copy{top:29%;left:22px;right:22px}
+ .motion-b .hero h1{font-size:clamp(28px,7.7vw,43px)}
+ .motion-b .hero-copy .eyebrow{font-size:12px;margin-bottom:18px;letter-spacing:.13em}
+ .motion-b .hero-sub{margin-top:18px}.motion-b .hero-positioning{margin-top:12px}
+ .motion-b .hero-bottom,.motion-b .hero-ai{font-size:10px}
+ .motion-b .hero-shade{background:linear-gradient(180deg,#03060970,transparent 24%,#03050860 52%,#03050820),radial-gradient(ellipse at 50% 40%,#02050988,transparent 75%)}
+ .motion-b .strengths-ribbon{padding-top:24px!important}
+ .motion-b .gallery-section{padding-bottom:32px}
+ .motion-b .gallery{scroll-padding-inline:22px;scrollbar-width:none}
+ .motion-b .gallery::-webkit-scrollbar,.motion-b .season-grid::-webkit-scrollbar{display:none}
+ .motion-b .gallery figure,.motion-b .gallery figure:nth-child(even){flex-basis:82%;margin:0}
+ .swipe-hint{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.12em;color:#b9b2a5;margin:0 0 16px}
+ .gallery-swipe{width:calc(100% - 44px);margin:0 auto 18px}
+ .motion-b .gallery-controls{margin:0 0 18px}
+ .motion-b section.experience.wrap{padding-top:40px;padding-bottom:25px;display:block}
+ .motion-b .experience-intro,.motion-b .experience .section-title{position:static;inset:auto}
+ .motion-b .experience .section-title{margin-bottom:34px}
+ .motion-b .experience h2{font-size:28px;line-height:1.8}
+ .motion-b .experience-grid article{min-height:248px;padding:3px 12px 28px;margin-bottom:20px}
+ .motion-b .experience-grid h3{font-size:24px;line-height:1.8;margin:18px 0 12px}
+ .motion-b .experience-grid p{font-size:15px;line-height:2}
+ .motion-b .experience-num{font-size:44px;line-height:48px}
+ .motion-b .experience.stack-safe .experience-grid article{top:calc(24px + var(--panel-index)*56px)}
+ .motion-b section.compare-section.wrap{padding-top:30px}
+ .motion-b .budget .copy-line{display:block}
+ .motion-b .process{padding-left:24px}
+ .motion-b .process li{border-top:0}
+ .motion-b .process li:before,.motion-b .process li:nth-child(n):before{left:-20px;top:0;width:1px;height:100%;transform-origin:top;transform:scaleY(var(--step-light,1))}
+ .motion-b .process li:after{content:'';position:absolute;left:-22px;top:35px;width:5px;height:5px;border-radius:50%;background:#cbbda1b3}
+ .motion-b .seasons{overflow:hidden}
+ .motion-b .season-grid{display:flex;gap:18px;width:calc(100% + 44px);margin-inline:-22px;padding:0 22px 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:22px;scrollbar-width:none}
+ .motion-b .season-grid figure,.motion-b .season-grid figure:nth-child(even){flex:0 0 83%;min-width:0;padding:0;scroll-snap-align:start}
+ .motion-b .season-grid img{aspect-ratio:1.05}.motion-b .season-grid figcaption{padding-top:22px}
+ .motion-b .season-grid h3{font-size:32px;margin:8px 0 10px}.motion-b .season-grid p{font-size:16px;line-height:1.9}
+ .season-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px}.season-nav-controls{display:flex;gap:10px}
+ .season-nav button{background:transparent;border:1px solid #ffffff40;min-width:62px;min-height:44px;font-size:13px;padding:7px 13px}.season-nav button:disabled{opacity:.3;cursor:default}.season-count{font-size:12px;letter-spacing:.15em;color:var(--accent)}
+ .motion-b .mobile-cta{left:18px;right:18px;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:76px minmax(0,1fr);gap:0;min-height:62px;padding:0;background:#f1eee7;color:#252724;border:0;border-radius:0;box-shadow:0 5px 22px #0003;opacity:1;transform:none;transition:transform .45s ease,opacity .4s,visibility .45s}
+ .motion-b .mobile-cta .contact-label{display:flex;align-items:center;justify-content:center;align-self:stretch;margin:17px 0;border-right:1px solid #706c6050;font:400 10px/1.4 var(--sans);letter-spacing:.12em;color:#696358}
+ .motion-b .mobile-cta .contact-action{display:block;min-width:0;text-align:center;padding:17px 12px;font:400 15px/1.8 var(--serif);letter-spacing:.045em}
+ .motion-b .mobile-cta:active{background:#ded8cb}
+ .motion-b .mobile-cta.is-scrolling,.motion-b .mobile-cta.hidden{transform:translateY(calc(100% + 30px + env(safe-area-inset-bottom,0px)));opacity:0;visibility:hidden;pointer-events:none}
+ .motion-b .mobile-cta:focus-visible{transform:none;opacity:1;visibility:visible;pointer-events:auto}
+}
+@media(max-width:360px){.motion-b .mobile-cta{left:12px;right:12px;grid-template-columns:65px minmax(0,1fr)}.motion-b .mobile-cta .contact-action{font-size:14px;padding-inline:7px;letter-spacing:0}.motion-b .experience-grid h3{font-size:22px}}
+@media(max-width:760px) and (max-height:680px){.motion-b .hero-copy{top:25%}.motion-b .hero-sub{margin-top:12px}.motion-b .hero-positioning{margin-top:8px}.motion-b .hero h1{line-height:1.65}}
+/* All pause/reduced states show final content in ordinary document flow. */
+.motion-b .motion-instant,.motion-b .motion-instant:after,.motion-b .motion-instant>img{transition:none!important}
+:is(.motion-paused,.motion-reduced) .hero-scene,:is(.motion-paused,.motion-reduced) .hero h1 span{animation:none!important;opacity:1;transform:none;scale:1;transition:none!important}
+:is(.motion-paused,.motion-reduced) .lamp-zone{animation:none!important;opacity:0}
+:is(.motion-paused,.motion-reduced) .hero-copy{opacity:1!important;transform:none!important}
+:is(.motion-paused,.motion-reduced) .hero-bottom{opacity:1}
+:is(.motion-paused,.motion-reduced) .hero-bottom i:after{animation:none;transform:none}
+:is(.motion-paused,.motion-reduced) .photo-window:after{transform:scaleY(0)!important;transition:none!important}
+:is(.motion-paused,.motion-reduced) .photo-window>img,:is(.motion-paused,.motion-reduced) .slide-window>img{transform:none!important;transition:none!important}
+:is(.motion-paused,.motion-reduced) .surface-panel{transform:none!important;clip-path:none!important;transition:none!important}
+:is(.motion-paused,.motion-reduced) .copy-line{opacity:1!important;transform:none!important}
+:is(.motion-paused,.motion-reduced) .roll-strip{transform:translateY(-90.9090909%)!important}
+:is(.motion-paused,.motion-reduced) .process li:before{transform:none!important;transition:none!important}
+:is(.motion-paused,.motion-reduced) .experience-grid article,:is(.motion-paused,.motion-reduced) .experience-intro{position:static!important}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.motion-b *,.motion-b *:before,.motion-b *:after{animation:none!important;transition:none!important}.lamp-zone{opacity:0}.motion-b .hero h1 span{opacity:1;transform:none}.motion-b .experience-grid article,.motion-b .experience-intro{position:static!important}}
+
+/* CONTACT: fixed warm highlights tied to photographed lighting locations. */
+.contact-interactive{--contact-cta-light:0}
+.contact-lights{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.contact-lamp-zone{opacity:0;transition:opacity 1.05s cubic-bezier(.22,.65,.3,1)}
+.contact-interactive .contact-copy{position:relative;z-index:1}
+.contact-interactive .contact-copy h2{color:#fff;text-shadow:0 2px 16px #0008}
+.contact-interactive .contact-copy>p{color:#e7e3dd;text-shadow:0 1px 10px #000b}
+.contact-interactive .contact-copy>.eyebrow{transition:color .8s,text-shadow .8s}
+.contact-interactive .contact-copy:has(.button:hover)>.eyebrow,.contact-interactive .contact-copy:focus-within>.eyebrow{color:#dcc7a4;text-shadow:0 0 12px #dec09625}
+.motion-b .contact-interactive .button{box-shadow:inset 0 0 0 1px rgb(242 223 188 / calc(var(--contact-cta-light)*.3));transition:background .8s,border-color .8s,box-shadow 1.2s}
+.contact-interactive .button:before{content:'';position:absolute;left:12px;right:12px;top:0;height:1px;background:#fff0d4;opacity:var(--contact-cta-light);box-shadow:0 0 7px #e3bf8250;transition:opacity .9s;pointer-events:none}
+@media(hover:none),(pointer:coarse){.contact-lamp-zone{transition:opacity .35s linear}}
+:is(.motion-paused,.motion-reduced) .contact-lamp-zone{opacity:0!important;transition:none!important}
+:is(.motion-paused,.motion-reduced) .contact-interactive .button:before{opacity:0!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){.contact-lights{display:none}.contact-interactive .button:before{display:none}}
+
+:is(.motion-paused,.motion-reduced) .photo-window,:is(.motion-paused,.motion-reduced) .work-main figcaption{opacity:1!important;transform:none!important}
+:is(.motion-paused,.motion-reduced) .photo-entry-mask{transform:scaleY(0)!important}
+
+/* Align navigation with the hero after removing the preview banner. */
+body.luxyd-preview .site-header{top:0}
+
+/* Keep the full residential tree visible on narrow screens. */
+@media(max-width:767px){#works .works-grid>figure:nth-child(2) img{aspect-ratio:.85}}
+/* Keep the illuminated pergola inside the closer mobile crop. */
+@media(max-width:767px){#works .works-grid>figure:nth-child(3) img{object-position:72% center}}
+
+/* User reference framing: preserve both light installations on all screens. */
+#works .works-grid>figure:nth-child(3) img{aspect-ratio:1730/870;object-position:center}
+
+/* Preserve full illuminated trees in portrait gallery photographs. */
+#gallery figure:nth-child(even) img{aspect-ratio:.75}
+#gallery figcaption{flex-wrap:wrap;gap:4px 14px}
+#gallery figcaption span:last-child{font-size:14px;letter-spacing:.03em}
+
+/* Give the Bashamichi lighting a larger frame alongside the other projects. */
+#gallery figure:nth-child(2) img{aspect-ratio:1;object-position:center}
+@media(min-width:768px){#gallery figure:nth-child(2){flex-basis:470px}}
+
+/* Preserve the height of the real tree and planting photographs in SCENES. */
+#scenes .scene-grid>article:nth-child(3) img{aspect-ratio:.75}
+#scenes .scene-grid>article:nth-child(4) img,#scenes .scene-grid>article:nth-child(7) img{aspect-ratio:.85}
+
+/* Show the hospital facade and full row of lights. */
+#scenes .scene-grid>article:nth-child(5) img{aspect-ratio:3024/3534;object-position:center}
+
+/* Preserve the full light tent and surrounding park. */
+#scenes .scene-grid>article:nth-child(7) img{aspect-ratio:1800/1013;object-position:center}
+
+/* Six-image Instagram layout and a tighter transition into SCENES. */
+section.instagram-section{padding-block:80px 60px;grid-template-rows:1fr 1fr;row-gap:28px}
+.instagram-intro{align-self:end}
+.instagram-intro .section-title{margin-bottom:0}
+.instagram-grid{grid-row:1/3}
+.instagram-section>.button{grid-row:2;align-self:start}
+.instagram-section+#scenes{padding-top:80px}
+@media(max-width:767px){
+ section.instagram-section{padding-block:60px 40px}
+ .instagram-intro{margin-bottom:28px}
+ .instagram-section+#scenes{padding-top:60px}
+}
+
+/* Remove the extra divider between consultation and Instagram. */
+section.instagram-section{border-top:0}
+
+/* Place AI captions on the two generated SCENES photographs. */
+.scene-photo{position:relative;isolation:isolate}
+.scene-photo-note{position:absolute;right:10px;bottom:10px;z-index:3;max-width:calc(100% - 20px);padding:5px 8px;background:rgb(0 0 0 / .62);color:#f3f0eb;font-size:10px;line-height:1.7;letter-spacing:0;text-align:right;pointer-events:none}
+@media(max-width:767px){.scene-photo-note{right:8px;bottom:8px;max-width:calc(100% - 16px);font-size:10px;padding:4px 6px}}
+
+/* Avoid stacking WORKS bottom padding with Instagram top padding. */
+section#works{padding-bottom:0}
+section#instagram{padding-top:80px;padding-bottom:40px}
+#instagram+#scenes{padding-top:60px}
+@media(max-width:767px){section#instagram{padding-top:48px;padding-bottom:28px}#instagram+#scenes{padding-top:44px}}
