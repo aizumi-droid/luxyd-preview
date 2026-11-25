@@ -68,6 +68,10 @@
 .motion-b .budget .section-title:after{content:'';display:block;width:44px;height:1px;background:#9b8b6e;margin-top:24px}
 .motion-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .roll-visual{font-variant-numeric:tabular-nums;line-height:inherit}
+/* Keep the full sales figure together at the existing grid widths. */
+.stats .stat-sales{container-type:inline-size}
+.stats .stat-sales strong{font-size:min(58px,22cqw)}
+.stats .stat-sales small{font-size:min(18px,10cqw);padding-left:2px}
 .roll-digit{display:inline-block;position:relative;line-height:inherit}.roll-ghost{visibility:hidden}.roll-window{position:absolute;inset:0;overflow:hidden}.roll-strip{display:block;transform:translateY(-90.9090909%)}.roll-row{display:block;line-height:inherit}
 .motion-b .process li{position:relative}
 .motion-b .process li:before{content:'';position:absolute;left:0;top:-1px;width:calc(100% + 25px);height:1px;background:#cbbda180;transform-origin:left;transform:scaleX(var(--step-light,1));transition:transform .35s ease-out;pointer-events:none}

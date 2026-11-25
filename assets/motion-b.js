@@ -90,17 +90,28 @@ heading('.service h2',['相談する相手は、','ひとりでいい。']);
 heading('.budget h2',['ご予算から、','いっしょに考えます。']);
 // OUR STRENGTHS heading remains static.
 // OUR STRENGTHS 37 years remains fully opaque and static.
-// Only the first three statistics roll. Units, decimal point, labels and notes remain static.
+// Roll the digits in the first three statistics, preserving units and punctuation.
 $$('.stats>div:nth-child(-n+3) strong').forEach((strong,index)=>{
  const spoken=document.createElement('span');spoken.className='motion-sr-only';spoken.textContent=strong.textContent;
  const visual=document.createElement('span');visual.className='roll-visual';visual.setAttribute('aria-hidden','true');
- const textNode=[...strong.childNodes].find(n=>n.nodeType===3);const number=textNode.textContent;
- for(const c of number){if(!/\d/.test(c)){visual.append(document.createTextNode(c));continue;}
-  const digit=document.createElement('span');digit.className='roll-digit';const ghost=document.createElement('span');ghost.className='roll-ghost';ghost.textContent=c;digit.append(ghost);
-  const win=document.createElement('span');win.className='roll-window';const strip=document.createElement('span');strip.className='roll-strip';
-  rollDigits(Number(c)).forEach(n=>{const row=document.createElement('span');row.className='roll-row';row.textContent=n;strip.append(row);});win.append(strip);digit.append(win);visual.append(digit);
+ for(const part of [strong,...strong.querySelectorAll('[data-roll-number]')]){
+  for(const textNode of [...part.childNodes].filter(node=>node.nodeType===Node.TEXT_NODE)){
+   const digits=document.createDocumentFragment();
+   for(const c of textNode.textContent){
+    if(!/\d/.test(c)){digits.append(document.createTextNode(c));continue;}
+    const digit=document.createElement('span');digit.className='roll-digit';
+    const ghost=document.createElement('span');ghost.className='roll-ghost';ghost.textContent=c;digit.append(ghost);
+    const win=document.createElement('span');win.className='roll-window';
+    const strip=document.createElement('span');strip.className='roll-strip';
+    rollDigits(Number(c)).forEach(n=>{
+     const row=document.createElement('span');row.className='roll-row';row.textContent=n;strip.append(row);
+    });
+    win.append(strip);digit.append(win);digits.append(digit);
+   }
+   textNode.replaceWith(digits);
+  }
  }
- textNode.remove();while(strong.firstChild)visual.append(strong.firstChild);strong.append(spoken,visual);
+ while(strong.firstChild)visual.append(strong.firstChild);strong.append(spoken,visual);
  register(strong,()=>{visual.querySelectorAll('.roll-strip').forEach(strip=>animate(strip,[{transform:'translateY(0)',offset:0,easing:'linear'},{transform:'translateY(-81.8181818%)',offset:.76,easing:'cubic-bezier(.2,.65,.3,1)'},{transform:'translateY(-90.9090909%)',offset:.94},{transform:'translateY(-90.9090909%)',offset:1}],{duration:small.matches?850:950,delay:index*100,easing:'cubic-bezier(.16,.65,.24,1)',fill:'both'}));});
 });
 const experience=$('.experience'),experienceGrid=$('.experience-grid'),experiences=$$('.experience-grid article');
