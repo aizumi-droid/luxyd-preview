@@ -72,6 +72,10 @@
 .stats .stat-sales{container-type:inline-size}
 .stats .stat-sales strong{font-size:min(58px,22cqw)}
 .stats .stat-sales small{font-size:min(18px,10cqw);padding-left:2px}
+@container (max-width:100px){
+ .stats .stat-sales strong{font-size:21cqw}
+ .stats .stat-sales small{padding-left:0}
+}
 .roll-digit{display:inline-block;position:relative;line-height:inherit}.roll-ghost{visibility:hidden}.roll-window{position:absolute;inset:0;overflow:hidden}.roll-strip{display:block;transform:translateY(-90.9090909%)}.roll-row{display:block;line-height:inherit}
 .motion-b .process li{position:relative}
 .motion-b .process li:before{content:'';position:absolute;left:0;top:-1px;width:calc(100% + 25px);height:1px;background:#cbbda180;transform-origin:left;transform:scaleX(var(--step-light,1));transition:transform .35s ease-out;pointer-events:none}
